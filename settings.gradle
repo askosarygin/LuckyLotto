@@ -14,3 +14,12 @@ dependencyResolutionManagement {
 }
 rootProject.name = "LuckyLotto"
 include ':app'
+include ':data'
+include ':common'
+include ':main-ui'
+include ':main-domain'
+include ':game-ui'
+include ':game-domain'
+include ':history-ui'
+include ':history-domain'
+include ':balance-ui'

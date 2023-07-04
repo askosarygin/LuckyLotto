@@ -11,6 +11,15 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/balance-ui" />
+            <option value="$PROJECT_DIR$/common" />
+            <option value="$PROJECT_DIR$/data" />
+            <option value="$PROJECT_DIR$/game-domain" />
+            <option value="$PROJECT_DIR$/game-ui" />
+            <option value="$PROJECT_DIR$/history-domain" />
+            <option value="$PROJECT_DIR$/history-ui" />
+            <option value="$PROJECT_DIR$/main-domain" />
+            <option value="$PROJECT_DIR$/main-ui" />
           </set>
         </option>
       </GradleProjectSettings>
