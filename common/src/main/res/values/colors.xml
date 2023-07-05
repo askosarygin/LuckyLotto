@@ -23,7 +23,15 @@
     <color name="lucky_lotto_button_gradient_10">#9C6E23</color>
     <color name="lucky_lotto_button_gradient_11">#704F19</color>
     <color name="lucky_lotto_button_gradient_12">#39280D</color>
+
+    <color name="lucky_lotto_font_gradient_1">#FFD336</color>
+    <color name="lucky_lotto_font_gradient_2">#FFFFFF</color>
+    <color name="lucky_lotto_font_gradient_3">#F6B449</color>
+    <color name="lucky_lotto_font_gradient_4">#99691B</color>
+    <color name="lucky_lotto_font_gradient_5">#F5C069</color>
+
     <color name="lucky_lotto_red">#CF1D37</color>
+    <color name="lucky_lotto_white">#FFFFFF</color>
 
 
 </resources>

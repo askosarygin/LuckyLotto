@@ -1,6 +1,8 @@
 package com.andreykosarygin.common
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicText
@@ -21,20 +23,22 @@ import androidx.compose.ui.unit.sp
 
 @Preview(showBackground = true)
 @Composable
-fun Preview() {
-    LuckyLottoButton("BALANCE") {
+private fun Preview() {
+    LuckyLottoButton(text = "BALANCE") {
 
     }
 }
 
 @Composable
 fun LuckyLottoButton(
+    paddingValues: PaddingValues = PaddingValues(0.dp),
     text: String,
     onClick: () -> Unit
 ) {
     Button(
         onClick = onClick,
         modifier = Modifier
+            .padding(paddingValues = paddingValues)
             .background(
                 brush = Brush.verticalGradient(
                     colors = listOf(
@@ -66,7 +70,7 @@ fun LuckyLottoButton(
                 fontSize = 48.sp,
                 fontFamily = FontFamily(
                     Font(
-                        resId = R.font.bitter_bold
+                        resId = R.font.bitter_700
                     )
                 ),
                 color = colorResource(id = R.color.lucky_lotto_red),
