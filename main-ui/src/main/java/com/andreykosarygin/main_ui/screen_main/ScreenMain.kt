@@ -44,7 +44,7 @@ fun ScreenMain(
             painter = painterResource(
                 id = R.drawable.background_main_screen
             ),
-            contentDescription = "background",
+            contentDescription = stringResource(id = com.andreykosarygin.common.R.string.content_description_background),
             alignment = Alignment.TopCenter,
             contentScale = ContentScale.Crop
         )
@@ -96,7 +96,7 @@ fun ScreenMain(
                 painter = painterResource(
                     id = R.drawable.background_chips_left
                 ),
-                contentDescription = "background"
+                contentDescription = stringResource(id = com.andreykosarygin.common.R.string.content_description_background)
             )
         }
         Box(
@@ -111,7 +111,7 @@ fun ScreenMain(
                 painter = painterResource(
                     id = R.drawable.background_chips_right
                 ),
-                contentDescription = "background"
+                contentDescription = stringResource(id = com.andreykosarygin.common.R.string.content_description_background)
             )
         }
     }
@@ -128,7 +128,7 @@ private fun SlotMachine(
         Image(
             modifier = Modifier.size(width = 332.dp, height = 218.dp),
             painter = painterResource(id = R.drawable.background_slot_machine),
-            contentDescription = "slot_machine_background"
+            contentDescription = stringResource(id = com.andreykosarygin.common.R.string.content_description_background)
         )
         LuckyLottoGradientText(
             modifier = Modifier
@@ -160,7 +160,7 @@ private fun Header(
         Image(
             modifier = Modifier.size(width = 337.dp, height = 165.dp),
             painter = painterResource(id = R.drawable.background_header),
-            contentDescription = "header_background"
+            contentDescription = stringResource(id = com.andreykosarygin.common.R.string.content_description_background)
         )
         LuckyLottoGradientText(
             modifier = Modifier.offset(y = (-4).dp, x = (-3).dp),

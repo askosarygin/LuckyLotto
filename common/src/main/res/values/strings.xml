@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">LuckyLotto</string>
 
-    //Main screen
+    //MainScreen
     <string name="header_app_name_1">LUCKY</string>
     <string name="header_app_name_2">LOTTO</string>
     <string name="header_top_prize_text">TOP PRIZE</string>
@@ -11,4 +11,8 @@
     <string name="start">START</string>
     <string name="balance">BALANCE</string>
     <string name="info">INFO</string>
+
+    //ContentDescriptions
+    <string name="content_description_back_arrow">Back arrow</string>
+    <string name="content_description_background">Background</string>
 </resources>
