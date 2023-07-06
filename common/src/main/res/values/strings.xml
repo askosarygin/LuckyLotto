@@ -15,4 +15,15 @@
     //ContentDescriptions
     <string name="content_description_back_arrow">Back arrow</string>
     <string name="content_description_background">Background</string>
+    <string name="content_description_background_info">Background info</string>
+
+    //InfoScreen
+    <string name="info_description">
+        SPIN THE WHEEL OF FORTUNE, GET COMBINATIONS OF IDENTICAL SYMBOLS AND EARN POINTS!
+        WE DO NOT USE REAL MONEY, YOU PLAY FOR POINTS IN THE GAME!
+    </string>
+    <string name="history">HISTORY</string>
+
+
+
 </resources>
