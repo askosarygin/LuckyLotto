@@ -20,7 +20,6 @@ import androidx.compose.ui.unit.sp
 import com.andreykosarygin.common.LuckyLottoButton
 import com.andreykosarygin.common.LuckyLottoCommonBackground
 import com.andreykosarygin.common.LuckyLottoWhiteText
-import com.andreykosarygin.main_ui.R
 
 @Preview(showBackground = true)
 @Composable
@@ -49,7 +48,7 @@ fun ScreenInfo(
             ) {
                 Image(
                     modifier = Modifier.size(width = 351.dp, height = 567.dp),
-                    painter = painterResource(id = R.drawable.background_info),
+                    painter = painterResource(id = com.andreykosarygin.common.R.drawable.background_info),
                     contentDescription = stringResource(
                         id = com.andreykosarygin.common.R.string.content_description_background_info
                     ),
