@@ -66,19 +66,19 @@ fun ScreenMain(
 
                 LuckyLottoButton(
                     paddingValues = PaddingValues(bottom = 19.dp),
-                    text = stringResource(id = com.andreykosarygin.common.R.string.start),
+                    text = stringResource(id = com.andreykosarygin.common.R.string.button_start),
                     onClick = onClickStart
                 )
 
                 LuckyLottoButton(
                     paddingValues = PaddingValues(bottom = 19.dp),
-                    text = stringResource(id = com.andreykosarygin.common.R.string.balance),
+                    text = stringResource(id = com.andreykosarygin.common.R.string.button_balance),
                     onClick = onClickBalance
                 )
 
                 LuckyLottoButton(
                     paddingValues = PaddingValues(bottom = 19.dp),
-                    text = stringResource(id = com.andreykosarygin.common.R.string.info),
+                    text = stringResource(id = com.andreykosarygin.common.R.string.button_info),
                     onClick = onClickInfo
                 )
             }

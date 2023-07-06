@@ -25,18 +25,19 @@ import com.andreykosarygin.main_ui.R
 @Preview(showBackground = true)
 @Composable
 private fun Preview() {
-    ScreenInfo()
+    ScreenInfo({},{})
 }
 
 @Composable
-fun ScreenInfo() {
+fun ScreenInfo(
+    onClickBack: () -> Unit,
+    onClickHistory: () -> Unit,
+) {
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier.fillMaxSize()
     ) {
-        LuckyLottoCommonBackground {
-            //todo back arrow press action
-        }
+        LuckyLottoCommonBackground(onClickBackArrow = onClickBack)
 
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -56,7 +57,8 @@ fun ScreenInfo() {
                 )
                 LuckyLottoWhiteText(
                     text = stringResource(
-                        id = com.andreykosarygin.common.R.string.info_description),
+                        id = com.andreykosarygin.common.R.string.info_description
+                    ),
                     fontSize = 32.sp,
                     font = Font(resId = com.andreykosarygin.common.R.font.bitter_700),
                     modifier = Modifier.padding(horizontal = 60.dp)
@@ -65,10 +67,9 @@ fun ScreenInfo() {
 
             LuckyLottoButton(
                 paddingValues = PaddingValues(top = 6.dp),
-                text = stringResource(id = com.andreykosarygin.common.R.string.history)
-            ) {
-
-            }
+                text = stringResource(id = com.andreykosarygin.common.R.string.history),
+                onClick = onClickHistory
+            )
         }
     }
 }
