@@ -16,7 +16,9 @@
     <string name="content_description_back_arrow">Back arrow</string>
     <string name="content_description_background">Background</string>
     <string name="content_description_background_info">Background info</string>
+    <string name="content_description_background_points">Background points</string>
     <string name="content_description_balance_info_background">Background balance info</string>
+    <string name="content_description_slot_machine">Slot machine</string>
 
     //InfoScreen
     <string name="info_description">
@@ -29,5 +31,7 @@
     <string name="balance">BALANCE</string>
     <string name="button_play">PLAY</string>
 
+    //GameScreen
+    <string name="spin">SPIN</string>
 
 </resources>
