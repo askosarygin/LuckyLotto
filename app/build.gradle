@@ -78,6 +78,7 @@ dependencies {
     annotationProcessor "androidx.room:room-compiler:$roomVersion"
     kapt "androidx.room:room-compiler:$roomVersion"
 
+    implementation "androidx.navigation:navigation-compose:$navigationComposeVersion"
 
     implementation project(path: ':balance-domain')
     implementation project(path: ':balance-ui')

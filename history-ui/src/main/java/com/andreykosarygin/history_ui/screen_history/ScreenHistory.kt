@@ -12,7 +12,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.snapshots.SnapshotStateList
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -22,9 +22,11 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.andreykosarygin.common.LuckyLottoButton
 import com.andreykosarygin.common.LuckyLottoCommonBackground
 import com.andreykosarygin.common.LuckyLottoWhiteText
+import com.andreykosarygin.common.NavigationRoutes.SCREEN_INFO
 import com.andreykosarygin.common.PointsInfo
 import com.andreykosarygin.common.R
 
@@ -32,34 +34,36 @@ import com.andreykosarygin.common.R
 @Preview(showBackground = true)
 @Composable
 private fun Preview() {
-    ScreenHistory({}, {}, mutableStateListOf(
-        PointsInfo(
-            "21.08",
-            "+15"
-        ),
-        PointsInfo(
-            "22.08",
-            "+10"
-        ),
-        PointsInfo(
-            "23.08",
-            "-20"
-        ),
-    )
-    )
+//    ScreenHistory()
 }
 
 @Composable
 fun ScreenHistory(
-    onClickBack: () -> Unit,
-    onClickHistory: () -> Unit,
-    listPointsInfo: SnapshotStateList<PointsInfo>
+    navController: NavController
 ) {
+    val listPointsInfo = remember {
+        mutableStateListOf(
+            PointsInfo(
+                "21.08",
+                "+15"
+            ),
+            PointsInfo(
+                "22.08",
+                "+10"
+            ),
+            PointsInfo(
+                "23.08",
+                "-20"
+            ),
+        )
+    }
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier.fillMaxSize()
     ) {
-        LuckyLottoCommonBackground(onClickBackArrow = onClickBack)
+        LuckyLottoCommonBackground(onClickBackArrow = {
+            navController.navigate(SCREEN_INFO)
+        })
 
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -100,7 +104,7 @@ fun ScreenHistory(
             LuckyLottoButton(
                 paddingValues = PaddingValues(top = 6.dp),
                 text = stringResource(id = R.string.history),
-                onClick = onClickHistory
+                onClick = {}
             )
         }
     }

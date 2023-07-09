@@ -17,26 +17,30 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.andreykosarygin.common.LuckyLottoButton
 import com.andreykosarygin.common.LuckyLottoCommonBackground
 import com.andreykosarygin.common.LuckyLottoWhiteText
+import com.andreykosarygin.common.NavigationRoutes.SCREEN_HISTORY
+import com.andreykosarygin.common.NavigationRoutes.SCREEN_MAIN
 
 @Preview(showBackground = true)
 @Composable
 private fun Preview() {
-    ScreenInfo({},{})
+//    ScreenInfo({},{})
 }
 
 @Composable
 fun ScreenInfo(
-    onClickBack: () -> Unit,
-    onClickHistory: () -> Unit,
+    navController: NavController
 ) {
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier.fillMaxSize()
     ) {
-        LuckyLottoCommonBackground(onClickBackArrow = onClickBack)
+        LuckyLottoCommonBackground(onClickBackArrow = {
+            navController.navigate(SCREEN_MAIN)
+        })
 
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -67,7 +71,9 @@ fun ScreenInfo(
             LuckyLottoButton(
                 paddingValues = PaddingValues(top = 6.dp),
                 text = stringResource(id = com.andreykosarygin.common.R.string.history),
-                onClick = onClickHistory
+                onClick = {
+                    navController.navigate(SCREEN_HISTORY)
+                }
             )
         }
     }

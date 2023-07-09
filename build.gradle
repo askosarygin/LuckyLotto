@@ -7,6 +7,7 @@ buildscript {
         converterGsonVersion = '2.5.0'
         roomVersion = '2.4.0'
         glideVersion = '4.15.0'
+        navigationComposeVersion = '2.6.0'
 
         //kotlin
         coreKtxVersion = '1.8.0'

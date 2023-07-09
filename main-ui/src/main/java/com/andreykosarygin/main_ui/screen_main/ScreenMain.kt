@@ -19,24 +19,24 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.andreykosarygin.common.LuckyLottoButton
 import com.andreykosarygin.common.LuckyLottoGradientText
 import com.andreykosarygin.common.LuckyLottoWhiteText
+import com.andreykosarygin.common.NavigationRoutes.SCREEN_BALANCE
+import com.andreykosarygin.common.NavigationRoutes.SCREEN_GAME
+import com.andreykosarygin.common.NavigationRoutes.SCREEN_INFO
 import com.andreykosarygin.main_ui.R
 
 @Preview(showBackground = true)
 @Composable
 private fun Preview() {
-    ScreenMain(
-        {}, {}, {}
-    )
+//    ScreenMain()
 }
 
 @Composable
 fun ScreenMain(
-    onClickStart: () -> Unit,
-    onClickBalance: () -> Unit,
-    onClickInfo: () -> Unit
+    navController: NavController
 ) {
     Box {
         Image(
@@ -67,19 +67,25 @@ fun ScreenMain(
                 LuckyLottoButton(
                     paddingValues = PaddingValues(bottom = 19.dp),
                     text = stringResource(id = com.andreykosarygin.common.R.string.button_start),
-                    onClick = onClickStart
+                    onClick = {
+                        navController.navigate(SCREEN_GAME)
+                    }
                 )
 
                 LuckyLottoButton(
                     paddingValues = PaddingValues(bottom = 19.dp),
                     text = stringResource(id = com.andreykosarygin.common.R.string.button_balance),
-                    onClick = onClickBalance
+                    onClick = {
+                        navController.navigate(SCREEN_BALANCE)
+                    }
                 )
 
                 LuckyLottoButton(
                     paddingValues = PaddingValues(bottom = 19.dp),
                     text = stringResource(id = com.andreykosarygin.common.R.string.button_info),
-                    onClick = onClickInfo
+                    onClick = {
+                        navController.navigate(SCREEN_INFO)
+                    }
                 )
             }
         }

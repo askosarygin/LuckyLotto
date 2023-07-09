@@ -30,40 +30,44 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.andreykosarygin.common.LuckyLottoButton
 import com.andreykosarygin.common.LuckyLottoCommonBackground
 import com.andreykosarygin.common.LuckyLottoGradientText
 import com.andreykosarygin.common.LuckyLottoWhiteText
+import com.andreykosarygin.common.NavigationRoutes.SCREEN_INFO
+import com.andreykosarygin.common.NavigationRoutes.SCREEN_MAIN
 import com.andreykosarygin.common.R
 
 @SuppressLint("UnrememberedMutableState")
 @Preview(showBackground = true)
 @Composable
 private fun Preview() {
-    ScreenGame({}, {}, {}, "25", false, 0, 0, 0, {})
+//    ScreenGame({}, {}, {}, "25", false, 0, 0, 0, {})
 //    SlotMachine(false)
 }
 
 @Composable
 fun ScreenGame(
-    onClickBack: () -> Unit,
-    onClickInfo: () -> Unit,
-    onClickSpin: () -> Unit,
-    balance: String,
-    playAnimation: Boolean,
-
-    drumIconShowLeft: Int,
-    drumIconShowCenter: Int,
-    drumIconShowRight: Int,
-    drumAnimationFinished: () -> Unit
+    navController: NavController
 ) {
+    val balance = "25"
+    var playAnimation by remember { mutableStateOf(false) }
+    val drumIconShowLeft = 0
+    val drumIconShowCenter = 0
+    val drumIconShowRight = 0
+
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier.fillMaxSize()
     ) {
-        LuckyLottoCommonBackground(onClickBackArrow = onClickBack)
+        LuckyLottoCommonBackground(onClickBackArrow = {
+            navController.navigate(SCREEN_MAIN)
+        })
 
-        ButtonInfo(onClickInfo = onClickInfo)
+        ButtonInfo(onClickInfo = {
+            navController.navigate(SCREEN_INFO)
+        })
 
         Box(
             modifier = Modifier.fillMaxSize(),
@@ -81,12 +85,16 @@ fun ScreenGame(
                     whatIndexNeedToShowLeft = drumIconShowLeft,
                     whatIndexNeedToShowCenter = drumIconShowCenter,
                     whatIndexNeedToShowRight = drumIconShowRight,
-                    animationFinishedListener = drumAnimationFinished
+                    animationFinishedListener = {
+                        playAnimation = false
+                    }
                 )
 
                 LuckyLottoButton(
                     text = stringResource(id = R.string.spin),
-                    onClick = onClickSpin,
+                    onClick = {
+                        playAnimation = true
+                    },
                     paddingValues = PaddingValues(top = 93.dp)
                 )
             }

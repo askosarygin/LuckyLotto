@@ -61,6 +61,8 @@ dependencies {
     implementation "com.google.dagger:dagger:$jetpackDaggerVersion"
     kapt "com.google.dagger:dagger-compiler:$jetpackDaggerVersion"
 
+    implementation "androidx.navigation:navigation-compose:$navigationComposeVersion"
+
 
     implementation project(path: ':common')
     implementation project(path: ':data')

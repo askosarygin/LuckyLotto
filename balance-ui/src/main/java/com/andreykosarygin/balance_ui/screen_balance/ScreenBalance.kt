@@ -18,29 +18,33 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.andreykosarygin.balance_ui.R
 import com.andreykosarygin.common.LuckyLottoButton
 import com.andreykosarygin.common.LuckyLottoCommonBackground
 import com.andreykosarygin.common.LuckyLottoGradientText
 import com.andreykosarygin.common.LuckyLottoWhiteText
+import com.andreykosarygin.common.NavigationRoutes.SCREEN_GAME
+import com.andreykosarygin.common.NavigationRoutes.SCREEN_MAIN
 
 @Preview(showBackground = true)
 @Composable
 private fun Preview() {
-    ScreenBalance({},{}, "25")
+//    ScreenBalance({},{}, "25")
 }
 
 @Composable
 fun ScreenBalance(
-    onClickBack: () -> Unit,
-    onClickPlay: () -> Unit,
-    balance: String
+    navController: NavController
 ) {
+    val balance = "0"
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.TopCenter
     ) {
-        LuckyLottoCommonBackground(onClickBackArrow = onClickBack)
+        LuckyLottoCommonBackground(onClickBackArrow = {
+            navController.navigate(SCREEN_MAIN)
+        })
 
         Column(
             modifier = Modifier.padding(top = 180.dp),
@@ -57,7 +61,9 @@ fun ScreenBalance(
                 text = stringResource(
                     id = com.andreykosarygin.common.R.string.button_play
                 ),
-                onClick = onClickPlay
+                onClick = {
+                    navController.navigate(SCREEN_GAME)
+                }
             )
         }
     }
