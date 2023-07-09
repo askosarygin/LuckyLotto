@@ -1,6 +1,5 @@
 package com.andreykosarygin.game_ui.screen_game
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.andreykosarygin.common.LuckyLottoViewModel
 import com.andreykosarygin.common.LuckyLottoViewModelSingleLifeEvent
@@ -18,6 +17,21 @@ class ScreenGameViewModel(
         viewModelScope.launch(Dispatchers.IO) {
             val pointsBalance = interactor.getPointsBalance()
             updatePointsBalance(pointsBalance.balance.toString())
+        }
+    }
+
+    fun initArguments(departureArguments: String?) {
+        departureArguments?.let {
+            val listOfArguments = it.split("_")
+            if (listOfArguments.size > 1) {
+                val drumIconNeedToShowLeft = listOfArguments[0].toInt()
+                val drumIconNeedToShowCenter = listOfArguments[1].toInt()
+                val drumIconNeedToShowRight = listOfArguments[2].toInt()
+
+                updateDrumIconNeedToShowLeft(drumIconNeedToShowLeft)
+                updateDrumIconNeedToShowCenter(drumIconNeedToShowCenter)
+                updateDrumIconNeedToShowRight(drumIconNeedToShowRight)
+            }
         }
     }
 
@@ -42,12 +56,6 @@ class ScreenGameViewModel(
         val drumIconNeedToShowCenter = (0 until howMuchIconsInDrum).random()
         val drumIconNeedToShowRight = (0 until howMuchIconsInDrum).random()
 
-        Log.i(
-            "MY_TAG", "drumIconNeedToShowLeft=$drumIconNeedToShowLeft\n" +
-                    "drumIconNeedToShowCenter=$drumIconNeedToShowCenter\n" +
-                    "drumIconNeedToShowRight=$drumIconNeedToShowRight"
-        )
-
         updateDrumIconNeedToShowLeft(drumIconNeedToShowLeft)
         updateDrumIconNeedToShowCenter(drumIconNeedToShowCenter)
         updateDrumIconNeedToShowRight(drumIconNeedToShowRight)
@@ -56,6 +64,10 @@ class ScreenGameViewModel(
     }
 
     fun buttonRespinPressed() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val pointsBalance = interactor.getPointsBalance()
+            updatePointsBalance(pointsBalance.balance.toString())
+        }
         updateShowPopupWindow(false)
     }
 
@@ -84,8 +96,6 @@ class ScreenGameViewModel(
                     earnPoints
                 )
             )
-            val pointsBalance = interactor.getPointsBalance()
-            updatePointsBalance(pointsBalance.balance.toString())
 
             interactor.saveToHistoryOfOperations(
                 PointsOperation(
@@ -99,9 +109,9 @@ class ScreenGameViewModel(
 
     data class Model(
         val playAnimation: Boolean = false,
-        val drumIconNeedToShowLeft: Int = 5,
-        val drumIconNeedToShowCenter: Int = 5,
-        val drumIconNeedToShowRight: Int = 5,
+        val drumIconNeedToShowLeft: Int = 1,
+        val drumIconNeedToShowCenter: Int = 1,
+        val drumIconNeedToShowRight: Int = 1,
         val earnPoints: String = "0",
         val showPopupWindow: Boolean = false,
         val pointsBalance: String = "0",

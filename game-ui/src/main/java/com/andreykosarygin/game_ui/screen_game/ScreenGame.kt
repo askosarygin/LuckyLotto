@@ -39,7 +39,6 @@ import com.andreykosarygin.common.LuckyLottoButton
 import com.andreykosarygin.common.LuckyLottoCommonBackground
 import com.andreykosarygin.common.LuckyLottoGradientText
 import com.andreykosarygin.common.LuckyLottoWhiteText
-import com.andreykosarygin.common.NavigationRoutes.SCREEN_INFO
 import com.andreykosarygin.common.NavigationRoutes.SCREEN_MAIN
 import com.andreykosarygin.common.R
 
@@ -52,9 +51,13 @@ import com.andreykosarygin.common.R
 
 @Composable
 fun ScreenGame(
+    departureArguments: String?,
     navController: NavController,
     viewModel: ScreenGameViewModel
 ) {
+    viewModel.initArguments(departureArguments)
+
+
     val model by viewModel.model.collectAsState()
 
     model.navigationEvent?.use { route ->
@@ -63,7 +66,7 @@ fun ScreenGame(
                 navController.navigate(SCREEN_MAIN)
 
             ScreenGameViewModel.Model.NavigationSingleLifeEvent.NavigationDestination.ScreenInfo ->
-                navController.navigate(SCREEN_INFO)
+                navController.navigate("ScreenInfo/${model.drumIconNeedToShowLeft}_${model.drumIconNeedToShowCenter}_${model.drumIconNeedToShowRight}_screengame")
         }
     }
 
@@ -428,7 +431,7 @@ fun SlotMachineDrumAnimation(
     sizeOfInnerBox: Dp,
     listOfDrawableResId: List<Int>,
     finishedListener: () -> Unit,
-    previewDrawableResId: Int = listOfDrawableResId.first()
+    previewDrawableResId: Int = listOfDrawableResId[whatIndexNeedToShow]
 ) {
     val animationTargetValue = sizeOfInnerBox + ((sizeOfBox - sizeOfInnerBox) / 2)
 

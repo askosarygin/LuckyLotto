@@ -12,6 +12,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.room.Room
 import com.andreykosarygin.balance_ui.screen_balance.ScreenBalance
 import com.andreykosarygin.balance_ui.screen_balance.ScreenBalanceViewModel
+import com.andreykosarygin.common.NavigationRoutes
 import com.andreykosarygin.common.NavigationRoutes.SCREEN_BALANCE
 import com.andreykosarygin.common.NavigationRoutes.SCREEN_GAME
 import com.andreykosarygin.common.NavigationRoutes.SCREEN_HISTORY
@@ -101,15 +102,27 @@ class MainActivity : ComponentActivity() {
                 composable(route = SCREEN_MAIN) {
                     ScreenMain(navController = navController, viewModel = ScreenMainViewModel())
                 }
-                composable(route = SCREEN_GAME) {
+                composable(route = SCREEN_GAME) { backStackEntry ->
+
+                    val arguments =
+                        backStackEntry.arguments?.getString(NavigationRoutes.DEPARTURE_KEY)
+
                     ScreenGame(
-                        navController = navController, viewModel = ScreenGameViewModel(
+                        departureArguments = arguments,
+                        navController = navController,
+                        viewModel = ScreenGameViewModel(
                             getApplicationInstance().interactorImplGameDomain
                         )
                     )
                 }
-                composable(route = SCREEN_INFO) {
-                    ScreenInfo(navController = navController, viewModel = ScreenInfoViewModel())
+                composable(route = SCREEN_INFO) { backStackEntry ->
+                    val arguments =
+                        backStackEntry.arguments?.getString(NavigationRoutes.DEPARTURE_KEY)
+                    ScreenInfo(
+                        departureArguments = arguments,
+                        navController = navController,
+                        viewModel = ScreenInfoViewModel()
+                    )
                 }
                 composable(route = SCREEN_BALANCE) {
                     ScreenBalance(
@@ -119,8 +132,11 @@ class MainActivity : ComponentActivity() {
                         )
                     )
                 }
-                composable(route = SCREEN_HISTORY) {
+                composable(route = SCREEN_HISTORY) { backStackEntry ->
+                    val arguments =
+                        backStackEntry.arguments?.getString(NavigationRoutes.DEPARTURE_KEY)
                     ScreenHistory(
+                        departureArguments = arguments,
                         navController = navController,
                         viewModel = ScreenHistoryViewModel(
                             getApplicationInstance().interactorImplHistoryDomain

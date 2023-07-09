@@ -7,12 +7,26 @@ class ScreenInfoViewModel (
 
 ) : LuckyLottoViewModel<ScreenInfoViewModel.Model>(Model()){
 
-    fun buttonBackPressed() {
-        updateNavigationEvent(
-            Model.NavigationSingleLifeEvent(
-                Model.NavigationSingleLifeEvent.NavigationDestination.ScreenMain
-            )
-        )
+    fun buttonBackPressed(departureArguments: String?) {
+        departureArguments?.let {
+            val argumentsList = it.split("_")
+
+            if (argumentsList.size > 1) {
+                updateDepartureArguments(departureArguments)
+                updateNavigationEvent(
+                    Model.NavigationSingleLifeEvent(
+                        Model.NavigationSingleLifeEvent.NavigationDestination.ScreenGame
+                    )
+                )
+            } else {
+                updateNavigationEvent(
+                    Model.NavigationSingleLifeEvent(
+                        Model.NavigationSingleLifeEvent.NavigationDestination.ScreenMain
+                    )
+                )
+            }
+        }
+
     }
 
     fun buttonHistoryPressed() {
@@ -24,6 +38,7 @@ class ScreenInfoViewModel (
     }
 
     data class Model(
+        val departureArguments: String? = null,
         val navigationEvent: NavigationSingleLifeEvent? = null
     ) {
         class NavigationSingleLifeEvent(
@@ -33,8 +48,17 @@ class ScreenInfoViewModel (
         ) {
             enum class NavigationDestination {
                 ScreenMain,
+                ScreenGame,
                 ScreenHistory
             }
+        }
+    }
+
+    private fun updateDepartureArguments(departureArguments: String) {
+        update {
+            it.copy(
+                departureArguments = departureArguments
+            )
         }
     }
 

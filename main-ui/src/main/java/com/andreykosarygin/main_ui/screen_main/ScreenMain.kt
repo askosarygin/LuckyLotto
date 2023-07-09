@@ -25,8 +25,6 @@ import com.andreykosarygin.common.LuckyLottoButton
 import com.andreykosarygin.common.LuckyLottoGradientText
 import com.andreykosarygin.common.LuckyLottoWhiteText
 import com.andreykosarygin.common.NavigationRoutes.SCREEN_BALANCE
-import com.andreykosarygin.common.NavigationRoutes.SCREEN_GAME
-import com.andreykosarygin.common.NavigationRoutes.SCREEN_INFO
 import com.andreykosarygin.main_ui.R
 
 //@Preview(showBackground = true)
@@ -45,11 +43,16 @@ fun ScreenMain(
     model.navigationEvent?.use { route ->
         when (route) {
             ScreenMainViewModel.Model.NavigationSingleLifeEvent.NavigationDestination.ScreenGame ->
-                navController.navigate(SCREEN_GAME)
+                navController.navigate(
+                    buildString {
+                        append("ScreenGame/")
+                        append("emptyArgument")
+                    }
+                )
             ScreenMainViewModel.Model.NavigationSingleLifeEvent.NavigationDestination.ScreenBalance ->
                 navController.navigate(SCREEN_BALANCE)
             ScreenMainViewModel.Model.NavigationSingleLifeEvent.NavigationDestination.ScreenInfo ->
-                navController.navigate(SCREEN_INFO)
+                navController.navigate("ScreenInfo/screenmain")
         }
     }
 

@@ -22,7 +22,6 @@ import androidx.navigation.NavController
 import com.andreykosarygin.common.LuckyLottoButton
 import com.andreykosarygin.common.LuckyLottoCommonBackground
 import com.andreykosarygin.common.LuckyLottoWhiteText
-import com.andreykosarygin.common.NavigationRoutes.SCREEN_HISTORY
 import com.andreykosarygin.common.NavigationRoutes.SCREEN_MAIN
 
 //@Preview(showBackground = true)
@@ -33,6 +32,7 @@ import com.andreykosarygin.common.NavigationRoutes.SCREEN_MAIN
 
 @Composable
 fun ScreenInfo(
+    departureArguments: String?,
     navController: NavController,
     viewModel: ScreenInfoViewModel
 ) {
@@ -42,8 +42,20 @@ fun ScreenInfo(
         when (route) {
             ScreenInfoViewModel.Model.NavigationSingleLifeEvent.NavigationDestination.ScreenMain ->
                 navController.navigate(SCREEN_MAIN)
+            ScreenInfoViewModel.Model.NavigationSingleLifeEvent.NavigationDestination.ScreenGame ->
+                navController.navigate(
+                    buildString {
+                        append("ScreenGame/")
+                        append(model.departureArguments)
+                    }
+                )
             ScreenInfoViewModel.Model.NavigationSingleLifeEvent.NavigationDestination.ScreenHistory ->
-                navController.navigate(SCREEN_HISTORY)
+                navController.navigate(
+                    buildString {
+                        append("ScreenHistory/")
+                        append(departureArguments)
+                    }
+                )
         }
     }
 
@@ -52,7 +64,7 @@ fun ScreenInfo(
         modifier = Modifier.fillMaxSize()
     ) {
         LuckyLottoCommonBackground(onClickBackArrow = {
-            viewModel.buttonBackPressed()
+            viewModel.buttonBackPressed(departureArguments)
         })
 
         Column(

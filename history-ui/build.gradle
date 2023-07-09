@@ -57,10 +57,6 @@ dependencies {
     debugImplementation 'androidx.compose.ui:ui-tooling'
     debugImplementation 'androidx.compose.ui:ui-test-manifest'
 
-
-    implementation "com.google.dagger:dagger:$jetpackDaggerVersion"
-    kapt "com.google.dagger:dagger-compiler:$jetpackDaggerVersion"
-
     implementation "androidx.navigation:navigation-compose:$navigationComposeVersion"
 
 

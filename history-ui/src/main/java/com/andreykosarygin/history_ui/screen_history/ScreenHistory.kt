@@ -22,7 +22,6 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.andreykosarygin.common.LuckyLottoCommonBackground
 import com.andreykosarygin.common.LuckyLottoWhiteText
-import com.andreykosarygin.common.NavigationRoutes.SCREEN_INFO
 import com.andreykosarygin.common.R
 
 //@SuppressLint("UnrememberedMutableState")
@@ -34,6 +33,7 @@ import com.andreykosarygin.common.R
 
 @Composable
 fun ScreenHistory(
+    departureArguments: String?,
     navController: NavController,
     viewModel: ScreenHistoryViewModel
 ) {
@@ -42,7 +42,12 @@ fun ScreenHistory(
     model.navigationEvent?.use { route ->
         when (route) {
             ScreenHistoryViewModel.Model.NavigationSingleLifeEvent.NavigationDestination.ScreenInfo ->
-                navController.navigate(SCREEN_INFO)
+                navController.navigate(
+                    buildString {
+                        append("ScreenInfo/")
+                        append(departureArguments)
+                    }
+                )
         }
     }
 
