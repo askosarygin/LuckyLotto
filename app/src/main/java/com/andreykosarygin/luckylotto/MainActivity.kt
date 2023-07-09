@@ -17,6 +17,7 @@ import com.andreykosarygin.common.NavigationRoutes.SCREEN_GAME
 import com.andreykosarygin.common.NavigationRoutes.SCREEN_HISTORY
 import com.andreykosarygin.common.NavigationRoutes.SCREEN_INFO
 import com.andreykosarygin.common.NavigationRoutes.SCREEN_MAIN
+import com.andreykosarygin.data.RepositoryBalanceDomainImpl
 import com.andreykosarygin.data.RepositoryGameDomainImpl
 import com.andreykosarygin.data.RepositoryHistoryDomainImpl
 import com.andreykosarygin.data.appdata.AppDataImpl
@@ -50,6 +51,9 @@ class MainApp : Application() {
     private lateinit var repositoryHistoryDomainImpl: RepositoryHistoryDomainImpl
     lateinit var interactorImplHistoryDomain: com.andreykosarygin.history_domain.InteractorImpl
 
+    private lateinit var repositoryBalanceDomainImpl: RepositoryBalanceDomainImpl
+    lateinit var interactorImplBalanceDomain: com.andreykosarygin.balance_domain.InteractorImpl
+
     override fun onCreate() {
         super.onCreate()
 
@@ -72,6 +76,13 @@ class MainApp : Application() {
         interactorImplHistoryDomain = com.andreykosarygin.history_domain.InteractorImpl(
             LoadHistoryOfPointsOperationsUseCase(
                 repositoryHistoryDomainImpl
+            )
+        )
+
+        repositoryBalanceDomainImpl = RepositoryBalanceDomainImpl(appDataImpl)
+        interactorImplBalanceDomain = com.andreykosarygin.balance_domain.InteractorImpl(
+            com.andreykosarygin.balance_domain.usecases.GetPointsBalanceUseCase(
+                repositoryBalanceDomainImpl
             )
         )
     }
@@ -103,7 +114,9 @@ class MainActivity : ComponentActivity() {
                 composable(route = SCREEN_BALANCE) {
                     ScreenBalance(
                         navController = navController,
-                        viewModel = ScreenBalanceViewModel()
+                        viewModel = ScreenBalanceViewModel(
+                            getApplicationInstance().interactorImplBalanceDomain
+                        )
                     )
                 }
                 composable(route = SCREEN_HISTORY) {

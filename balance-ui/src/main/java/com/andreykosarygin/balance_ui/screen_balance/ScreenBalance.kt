@@ -50,7 +50,6 @@ fun ScreenBalance(
         }
     }
 
-    val balance = "0"
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.TopCenter
@@ -66,7 +65,7 @@ fun ScreenBalance(
         ) {
             Balance(
                 modifier = Modifier.offset(x = 12.dp),
-                balance = balance
+                balance = model.pointsBalance
             )
 
             LuckyLottoButton(
