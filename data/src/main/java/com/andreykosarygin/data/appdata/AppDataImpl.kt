@@ -14,7 +14,7 @@ class AppDataImpl (
     }
 
     override fun getPointsBalance(): PointsBalance {
-        val balance = sharedPreferences.getLong(keyPointsBalance, -1L)
+        val balance = sharedPreferences.getLong(keyPointsBalance, 0L)
         return PointsBalance(balance)
     }
 }

@@ -62,11 +62,7 @@ fun ScreenGame(
         }
     }
 
-    val balance = "25"
     var playAnimation by remember { mutableStateOf(false) }
-    val drumIconShowLeft = 0
-    val drumIconShowCenter = 0
-    val drumIconShowRight = 0
 
     Box(
         contentAlignment = Alignment.Center,
@@ -85,7 +81,7 @@ fun ScreenGame(
             contentAlignment = Alignment.TopCenter
         ) {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                PointsValue(balance = balance)
+                PointsValue(balance = model.pointsBalance)
 
                 Header(
                     modifier = Modifier.padding(top = 14.dp, bottom = 33.dp)
@@ -93,9 +89,9 @@ fun ScreenGame(
 
                 SlotMachine(
                     playAnimation = playAnimation,
-                    whatIndexNeedToShowLeft = drumIconShowLeft,
-                    whatIndexNeedToShowCenter = drumIconShowCenter,
-                    whatIndexNeedToShowRight = drumIconShowRight,
+                    whatIndexNeedToShowLeft = model.drumIconNeedToShowLeft,
+                    whatIndexNeedToShowCenter = model.drumIconNeedToShowCenter,
+                    whatIndexNeedToShowRight = model.drumIconNeedToShowRight,
                     animationFinishedListener = {
                         playAnimation = false
                     }
