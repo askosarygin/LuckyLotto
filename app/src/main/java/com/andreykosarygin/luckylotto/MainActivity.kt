@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.andreykosarygin.balance_ui.screen_balance.ScreenBalance
+import com.andreykosarygin.balance_ui.screen_balance.ScreenBalanceViewModel
 import com.andreykosarygin.common.NavigationRoutes.SCREEN_BALANCE
 import com.andreykosarygin.common.NavigationRoutes.SCREEN_GAME
 import com.andreykosarygin.common.NavigationRoutes.SCREEN_HISTORY
@@ -37,7 +38,7 @@ class MainActivity : ComponentActivity() {
                     ScreenInfo(navController = navController, viewModel = ScreenInfoViewModel())
                 }
                 composable(route = SCREEN_BALANCE) {
-                    ScreenBalance(navController = navController)
+                    ScreenBalance(navController = navController, viewModel = ScreenBalanceViewModel())
                 }
                 composable(route = SCREEN_HISTORY) {
                     ScreenHistory(navController = navController)
