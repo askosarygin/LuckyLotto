@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.andreykosarygin.common.LuckyLottoViewModel
 import com.andreykosarygin.common.LuckyLottoViewModelSingleLifeEvent
 import com.andreykosarygin.common.PointsBalance
+import com.andreykosarygin.common.PointsOperation
 import com.andreykosarygin.game_domain.Interactor
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -64,17 +65,17 @@ class ScreenGameViewModel(
         model.value.apply {
             when {
                 (drumIconNeedToShowLeft == drumIconNeedToShowCenter) && (drumIconNeedToShowCenter == drumIconNeedToShowRight) ->
-                    showPopupAndUpdatePoints(1000L)
+                    showPopupAndUpdatePointsAndHistory(1000L)
 
                 (drumIconNeedToShowLeft == drumIconNeedToShowCenter) || (drumIconNeedToShowCenter == drumIconNeedToShowRight) || (drumIconNeedToShowLeft == drumIconNeedToShowRight) ->
-                    showPopupAndUpdatePoints(100L)
+                    showPopupAndUpdatePointsAndHistory(100L)
 
-                else -> showPopupAndUpdatePoints(-5L)
+                else -> showPopupAndUpdatePointsAndHistory(-5L)
             }
         }
     }
 
-    private fun showPopupAndUpdatePoints(earnPoints: Long) {
+    private fun showPopupAndUpdatePointsAndHistory(earnPoints: Long) {
         updateEarnPoints(earnPoints.toString())
         updateShowPopupWindow(true)
         viewModelScope.launch(Dispatchers.IO) {
@@ -85,6 +86,14 @@ class ScreenGameViewModel(
             )
             val pointsBalance = interactor.getPointsBalance()
             updatePointsBalance(pointsBalance.balance.toString())
+
+            interactor.saveToHistoryOfOperations(
+                PointsOperation(
+                    0L,
+                    System.currentTimeMillis(),
+                    earnPoints
+                )
+            )
         }
     }
 

@@ -31,5 +31,5 @@ interface PointsOperationsDAO {
 
 @Database(entities = [PointsOperationDatabaseClass::class], version = 1, exportSchema = false)
 abstract class PointsOperationsDatabase : RoomDatabase() {
-    abstract fun PointsOperationsDAO(): PointsOperationsDAO
+    abstract fun pointsOperationsDAO(): PointsOperationsDAO
 }

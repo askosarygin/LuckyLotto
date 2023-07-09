@@ -9,6 +9,7 @@ import androidx.activity.compose.setContent
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.room.Room
 import com.andreykosarygin.balance_ui.screen_balance.ScreenBalance
 import com.andreykosarygin.balance_ui.screen_balance.ScreenBalanceViewModel
 import com.andreykosarygin.common.NavigationRoutes.SCREEN_BALANCE
@@ -18,9 +19,13 @@ import com.andreykosarygin.common.NavigationRoutes.SCREEN_INFO
 import com.andreykosarygin.common.NavigationRoutes.SCREEN_MAIN
 import com.andreykosarygin.data.RepositoryGameDomainImpl
 import com.andreykosarygin.data.appdata.AppDataImpl
+import com.andreykosarygin.data.db.PointsOperationsDatabase
+import com.andreykosarygin.data.db.PointsOperationsStorage
+import com.andreykosarygin.data.db.PointsOperationsStorageImpl
 import com.andreykosarygin.game_domain.InteractorImpl
 import com.andreykosarygin.game_domain.usecases.GetPointsBalanceUseCase
 import com.andreykosarygin.game_domain.usecases.SavePointsBalanceUseCase
+import com.andreykosarygin.game_domain.usecases.SaveToHistoryOfOperationsUseCase
 import com.andreykosarygin.game_ui.screen_game.ScreenGame
 import com.andreykosarygin.game_ui.screen_game.ScreenGameViewModel
 import com.andreykosarygin.history_ui.screen_history.ScreenHistory
@@ -32,9 +37,11 @@ import com.andreykosarygin.main_ui.screen_main.ScreenMainViewModel
 
 class MainApp : Application() {
     private val sharedPreferencesName = "lucky_lotto_shared_preferences"
+    private val dbName = "lucky_lotto_db"
 
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var appDataImpl: AppDataImpl
+    private lateinit var pointsOperationsStorage: PointsOperationsStorage
     private lateinit var repositoryGameDomainImpl: RepositoryGameDomainImpl
     lateinit var interactorImplGameDomain: InteractorImpl
 
@@ -43,11 +50,16 @@ class MainApp : Application() {
 
         sharedPreferences = this.getSharedPreferences(sharedPreferencesName, Context.MODE_PRIVATE)
         appDataImpl = AppDataImpl(sharedPreferences)
-        repositoryGameDomainImpl = RepositoryGameDomainImpl(appDataImpl)
-
+        pointsOperationsStorage = PointsOperationsStorageImpl(
+            Room.databaseBuilder(this, PointsOperationsDatabase::class.java, dbName)
+                .build()
+                .pointsOperationsDAO()
+        )
+        repositoryGameDomainImpl = RepositoryGameDomainImpl(appDataImpl, pointsOperationsStorage)
         interactorImplGameDomain = InteractorImpl(
             GetPointsBalanceUseCase(repositoryGameDomainImpl),
-            SavePointsBalanceUseCase(repositoryGameDomainImpl)
+            SavePointsBalanceUseCase(repositoryGameDomainImpl),
+            SaveToHistoryOfOperationsUseCase(repositoryGameDomainImpl)
         )
     }
 }

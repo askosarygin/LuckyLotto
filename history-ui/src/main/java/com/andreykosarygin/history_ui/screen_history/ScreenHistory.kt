@@ -25,7 +25,7 @@ import androidx.navigation.NavController
 import com.andreykosarygin.common.LuckyLottoCommonBackground
 import com.andreykosarygin.common.LuckyLottoWhiteText
 import com.andreykosarygin.common.NavigationRoutes.SCREEN_INFO
-import com.andreykosarygin.common.PointsInfo
+import com.andreykosarygin.common.OperationInfo
 import com.andreykosarygin.common.R
 
 //@SuppressLint("UnrememberedMutableState")
@@ -49,17 +49,17 @@ fun ScreenHistory(
         }
     }
 
-    val listPointsInfo = remember {
+    val listOperationInfos = remember {
         mutableStateListOf(
-            PointsInfo(
+            OperationInfo(
                 "21.08",
                 "+15"
             ),
-            PointsInfo(
+            OperationInfo(
                 "22.08",
                 "+10"
             ),
-            PointsInfo(
+            OperationInfo(
                 "23.08",
                 "-20"
             ),
@@ -98,7 +98,7 @@ fun ScreenHistory(
                         .padding(vertical = 35.dp)
                 ) {
                     LazyColumn {
-                        items(items = listPointsInfo) { pointsInfo ->
+                        items(items = listOperationInfos) { pointsInfo ->
                             LuckyLottoWhiteText(
                                 text = "${pointsInfo.date}                      ${pointsInfo.operationValue}",
                                 fontSize = 32.sp,
