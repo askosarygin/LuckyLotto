@@ -427,7 +427,8 @@ fun SlotMachineDrumAnimation(
     sizeOfBox: Dp,
     sizeOfInnerBox: Dp,
     listOfDrawableResId: List<Int>,
-    finishedListener: () -> Unit
+    finishedListener: () -> Unit,
+    previewDrawableResId: Int = listOfDrawableResId.first()
 ) {
     val animationTargetValue = sizeOfInnerBox + ((sizeOfBox - sizeOfInnerBox) / 2)
 
@@ -439,7 +440,7 @@ fun SlotMachineDrumAnimation(
     var durationMillis by remember { mutableStateOf(minimumDurationMillis) }
 
     var selectedItemIndex by remember { mutableStateOf(0) }
-    var drawableResId by remember { mutableStateOf(listOfDrawableResId.first()) }
+    var drawableResId by remember { mutableStateOf(previewDrawableResId) }
 
     var counterShownElements by remember { mutableStateOf(0) }
 
