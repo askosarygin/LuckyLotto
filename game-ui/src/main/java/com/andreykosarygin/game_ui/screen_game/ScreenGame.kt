@@ -1,9 +1,13 @@
 package com.andreykosarygin.game_ui.screen_game
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -15,14 +19,15 @@ import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
@@ -42,8 +47,7 @@ import com.andreykosarygin.common.R
 //@Preview(showBackground = true)
 //@Composable
 //private fun Preview() {
-//    ScreenGame({}, {}, {}, "25", false, 0, 0, 0, {})
-//    SlotMachine(false)
+//    PointsPopupWindow(earnPoints = "+15", {})
 //}
 
 @Composable
@@ -57,12 +61,28 @@ fun ScreenGame(
         when (route) {
             ScreenGameViewModel.Model.NavigationSingleLifeEvent.NavigationDestination.ScreenMain ->
                 navController.navigate(SCREEN_MAIN)
+
             ScreenGameViewModel.Model.NavigationSingleLifeEvent.NavigationDestination.ScreenInfo ->
                 navController.navigate(SCREEN_INFO)
         }
     }
 
-    var playAnimation by remember { mutableStateOf(false) }
+    val listDrumIcons = remember {
+        listOf(
+            com.andreykosarygin.game_ui.R.drawable.slot_machine_icon_bar,
+            com.andreykosarygin.game_ui.R.drawable.slot_machine_icon_jackpot,
+            com.andreykosarygin.game_ui.R.drawable.slot_machine_icon_cherry,
+            com.andreykosarygin.game_ui.R.drawable.slot_machine_icon_apple,
+            com.andreykosarygin.game_ui.R.drawable.slot_machine_icon_bonus,
+            com.andreykosarygin.game_ui.R.drawable.slot_machine_icon_coin,
+            com.andreykosarygin.game_ui.R.drawable.slot_machine_icon_crown,
+            com.andreykosarygin.game_ui.R.drawable.slot_machine_icon_lemon,
+            com.andreykosarygin.game_ui.R.drawable.slot_machine_icon_seven,
+            com.andreykosarygin.game_ui.R.drawable.slot_machine_icon_symbol,
+            com.andreykosarygin.game_ui.R.drawable.slot_machine_icon_watermelon,
+            com.andreykosarygin.game_ui.R.drawable.slot_machine_icon_wild,
+        )
+    }
 
     Box(
         contentAlignment = Alignment.Center,
@@ -88,23 +108,38 @@ fun ScreenGame(
                 )
 
                 SlotMachine(
-                    playAnimation = playAnimation,
+                    playAnimation = model.playAnimation,
                     whatIndexNeedToShowLeft = model.drumIconNeedToShowLeft,
                     whatIndexNeedToShowCenter = model.drumIconNeedToShowCenter,
                     whatIndexNeedToShowRight = model.drumIconNeedToShowRight,
+                    listDrumIcons = listDrumIcons,
                     animationFinishedListener = {
-                        playAnimation = false
+                        viewModel.animationFinished()
                     }
                 )
 
                 LuckyLottoButton(
                     text = stringResource(id = R.string.spin),
                     onClick = {
-                        playAnimation = true
+                        viewModel.buttonSpinPressed(listDrumIcons.size)
                     },
                     paddingValues = PaddingValues(top = 93.dp)
                 )
             }
+        }
+        AnimatedVisibility(
+            visible = model.showPopupWindow,
+            enter = fadeIn(
+                animationSpec = tween(delayMillis = 2000)
+            ),
+            exit = fadeOut()
+        ) {
+            PointsPopupWindow(
+                earnPoints = model.earnPoints,
+                onClickButtonRespin = {
+                    viewModel.buttonRespinPressed()
+                }
+            )
         }
     }
 }
@@ -189,6 +224,7 @@ fun SlotMachine(
     whatIndexNeedToShowLeft: Int,
     whatIndexNeedToShowCenter: Int,
     whatIndexNeedToShowRight: Int,
+    listDrumIcons: List<Int>,
     animationFinishedListener: () -> Unit
 ) {
     Box(
@@ -214,7 +250,8 @@ fun SlotMachine(
                 whatIndexNeedToShowLeft = whatIndexNeedToShowLeft,
                 whatIndexNeedToShowCenter = whatIndexNeedToShowCenter,
                 whatIndexNeedToShowRight = whatIndexNeedToShowRight,
-                animationFinishedListener = animationFinishedListener
+                animationFinishedListener = animationFinishedListener,
+                listDrumIcons = listDrumIcons
             )
         }
     }
@@ -232,24 +269,8 @@ fun Drum(
     minimumShownElementsLeft: Int = 20,
     minimumShownElementsCenter: Int = 30,
     minimumShownElementsRight: Int = 48,
+    listDrumIcons: List<Int>
 ) {
-    val listDrumIcons = remember {
-        mutableStateListOf(
-            com.andreykosarygin.game_ui.R.drawable.slot_machine_icon_bar,
-            com.andreykosarygin.game_ui.R.drawable.slot_machine_icon_jackpot,
-            com.andreykosarygin.game_ui.R.drawable.slot_machine_icon_cherry,
-            com.andreykosarygin.game_ui.R.drawable.slot_machine_icon_apple,
-            com.andreykosarygin.game_ui.R.drawable.slot_machine_icon_bonus,
-            com.andreykosarygin.game_ui.R.drawable.slot_machine_icon_coin,
-            com.andreykosarygin.game_ui.R.drawable.slot_machine_icon_crown,
-            com.andreykosarygin.game_ui.R.drawable.slot_machine_icon_lemon,
-            com.andreykosarygin.game_ui.R.drawable.slot_machine_icon_seven,
-            com.andreykosarygin.game_ui.R.drawable.slot_machine_icon_symbol,
-            com.andreykosarygin.game_ui.R.drawable.slot_machine_icon_watermelon,
-            com.andreykosarygin.game_ui.R.drawable.slot_machine_icon_wild,
-        )
-    }
-
     var needToStartAnimation by remember { mutableStateOf(true) }
 
     var playDrumAnimationLeft by remember { mutableStateOf(false) }
@@ -492,6 +513,54 @@ fun SlotMachineDrumAnimation(
                 painter = painterResource(id = drawableResId),
                 contentScale = ContentScale.Fit,
                 contentDescription = ""
+            )
+        }
+    }
+}
+
+@Composable
+private fun PointsPopupWindow(
+    earnPoints: String,
+    onClickButtonRespin: () -> Unit
+) {
+    Box(
+        modifier = Modifier
+            .background(
+                brush = Brush.linearGradient(
+                    colors = listOf(
+                        colorResource(id = R.color.lucky_lotto_dark_red),
+                        colorResource(id = R.color.lucky_lotto_dark_red)
+                    )
+                ),
+                alpha = (0.62f)
+            )
+            .fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        Column {
+            Box(
+                contentAlignment = Alignment.Center,
+                modifier = Modifier
+                    .offset(x = 9.dp)
+                    .padding(bottom = 100.dp)
+            ) {
+                Image(
+                    modifier = Modifier.size(size = 258.dp),
+                    painter = painterResource(id = com.andreykosarygin.game_ui.R.drawable.background_earn_points),
+                    contentDescription = stringResource(
+                        id = R.string.content_description_background_points
+                    )
+                )
+                LuckyLottoWhiteText(
+                    text = earnPoints,
+                    fontSize = 79.32.sp,
+                    font = Font(resId = R.font.bitter_900)
+                )
+            }
+
+            LuckyLottoButton(
+                text = stringResource(id = R.string.respin),
+                onClick = onClickButtonRespin
             )
         }
     }

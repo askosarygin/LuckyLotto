@@ -33,5 +33,6 @@
 
     //GameScreen
     <string name="spin">SPIN</string>
+    <string name="respin">RESPIN</string>
 
 </resources>

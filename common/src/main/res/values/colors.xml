@@ -33,5 +33,7 @@
     <color name="lucky_lotto_red">#CF1D37</color>
     <color name="lucky_lotto_white">#FFFFFF</color>
 
+    <color name="lucky_lotto_dark_red">#400610</color>
+
 
 </resources>
