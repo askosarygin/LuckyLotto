@@ -8,13 +8,14 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -24,22 +25,34 @@ import com.andreykosarygin.common.LuckyLottoWhiteText
 import com.andreykosarygin.common.NavigationRoutes.SCREEN_HISTORY
 import com.andreykosarygin.common.NavigationRoutes.SCREEN_MAIN
 
-@Preview(showBackground = true)
-@Composable
-private fun Preview() {
+//@Preview(showBackground = true)
+//@Composable
+//private fun Preview() {
 //    ScreenInfo({},{})
-}
+//}
 
 @Composable
 fun ScreenInfo(
-    navController: NavController
+    navController: NavController,
+    viewModel: ScreenInfoViewModel
 ) {
+    val model by viewModel.model.collectAsState()
+
+    model.navigationEvent?.use { route ->
+        when (route) {
+            ScreenInfoViewModel.Model.NavigationSingleLifeEvent.NavigationDestination.ScreenMain ->
+                navController.navigate(SCREEN_MAIN)
+            ScreenInfoViewModel.Model.NavigationSingleLifeEvent.NavigationDestination.ScreenHistory ->
+                navController.navigate(SCREEN_HISTORY)
+        }
+    }
+
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier.fillMaxSize()
     ) {
         LuckyLottoCommonBackground(onClickBackArrow = {
-            navController.navigate(SCREEN_MAIN)
+            viewModel.buttonBackPressed()
         })
 
         Column(
@@ -72,7 +85,7 @@ fun ScreenInfo(
                 paddingValues = PaddingValues(top = 6.dp),
                 text = stringResource(id = com.andreykosarygin.common.R.string.history),
                 onClick = {
-                    navController.navigate(SCREEN_HISTORY)
+                    viewModel.buttonHistoryPressed()
                 }
             )
         }

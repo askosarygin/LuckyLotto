@@ -16,6 +16,7 @@ import com.andreykosarygin.game_ui.screen_game.ScreenGame
 import com.andreykosarygin.game_ui.screen_game.ScreenGameViewModel
 import com.andreykosarygin.history_ui.screen_history.ScreenHistory
 import com.andreykosarygin.main_ui.screen_info.ScreenInfo
+import com.andreykosarygin.main_ui.screen_info.ScreenInfoViewModel
 import com.andreykosarygin.main_ui.screen_main.ScreenMain
 import com.andreykosarygin.main_ui.screen_main.ScreenMainViewModel
 
@@ -33,7 +34,7 @@ class MainActivity : ComponentActivity() {
                     ScreenGame(navController = navController, viewModel = ScreenGameViewModel())
                 }
                 composable(route = SCREEN_INFO) {
-                    ScreenInfo(navController = navController)
+                    ScreenInfo(navController = navController, viewModel = ScreenInfoViewModel())
                 }
                 composable(route = SCREEN_BALANCE) {
                     ScreenBalance(navController = navController)
