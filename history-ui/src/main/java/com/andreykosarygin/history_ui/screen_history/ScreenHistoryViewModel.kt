@@ -1,21 +1,13 @@
-package com.andreykosarygin.game_ui.screen_game
+package com.andreykosarygin.history_ui.screen_history
 
 import com.andreykosarygin.common.LuckyLottoViewModel
 import com.andreykosarygin.common.LuckyLottoViewModelSingleLifeEvent
 
-class ScreenGameViewModel (
+class ScreenHistoryViewModel (
 
-) : LuckyLottoViewModel<ScreenGameViewModel.Model>(Model()){
+) : LuckyLottoViewModel<ScreenHistoryViewModel.Model>(Model()){
 
     fun buttonBackPressed() {
-        updateNavigationEvent(
-            Model.NavigationSingleLifeEvent(
-                Model.NavigationSingleLifeEvent.NavigationDestination.ScreenMain
-            )
-        )
-    }
-
-    fun buttonInfoPressed() {
         updateNavigationEvent(
             Model.NavigationSingleLifeEvent(
                 Model.NavigationSingleLifeEvent.NavigationDestination.ScreenInfo
@@ -32,7 +24,6 @@ class ScreenGameViewModel (
             navigateTo
         ) {
             enum class NavigationDestination {
-                ScreenMain,
                 ScreenInfo
             }
         }

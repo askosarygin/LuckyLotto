@@ -1,12 +1,9 @@
 package com.andreykosarygin.main_ui.screen_info
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import com.andreykosarygin.common.LuckyLottoViewModel
 import com.andreykosarygin.common.LuckyLottoViewModelSingleLifeEvent
-import javax.inject.Inject
 
-class ScreenInfoViewModel @Inject constructor(
+class ScreenInfoViewModel (
 
 ) : LuckyLottoViewModel<ScreenInfoViewModel.Model>(Model()){
 
@@ -46,18 +43,6 @@ class ScreenInfoViewModel @Inject constructor(
             it.copy(
                 navigationEvent = navigationEvent
             )
-        }
-    }
-
-    class Factory @Inject constructor(
-
-    ) : ViewModelProvider.Factory {
-        @Suppress("UNCHECKED_CAST")
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            require(modelClass == ScreenInfoViewModel::class.java)
-            return ScreenInfoViewModel(
-
-            ) as T
         }
     }
 }

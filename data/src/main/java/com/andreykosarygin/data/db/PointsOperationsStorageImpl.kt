@@ -1,9 +1,8 @@
 package com.andreykosarygin.data.db
 
 import com.andreykosarygin.common.PointsOperationDB
-import javax.inject.Inject
 
-class PointsOperationsStorageImpl @Inject constructor(
+class PointsOperationsStorageImpl (
     private val database: PointsOperationsDAO
 ) : PointsOperationsStorage {
     override suspend fun save(pointsOperationDB: PointsOperationDB): Boolean {

@@ -1,12 +1,9 @@
 package com.andreykosarygin.balance_ui.screen_balance
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import com.andreykosarygin.common.LuckyLottoViewModel
 import com.andreykosarygin.common.LuckyLottoViewModelSingleLifeEvent
-import javax.inject.Inject
 
-class ScreenBalanceViewModel @Inject constructor(
+class ScreenBalanceViewModel (
 
 ) : LuckyLottoViewModel<ScreenBalanceViewModel.Model>(Model()){
 
@@ -46,18 +43,6 @@ class ScreenBalanceViewModel @Inject constructor(
             it.copy(
                 navigationEvent = navigationEvent
             )
-        }
-    }
-
-    class Factory @Inject constructor(
-
-    ) : ViewModelProvider.Factory {
-        @Suppress("UNCHECKED_CAST")
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            require(modelClass == ScreenBalanceViewModel::class.java)
-            return ScreenBalanceViewModel(
-
-            ) as T
         }
     }
 }

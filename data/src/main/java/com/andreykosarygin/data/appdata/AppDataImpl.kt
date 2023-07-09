@@ -2,9 +2,8 @@ package com.andreykosarygin.data.appdata
 
 import android.content.SharedPreferences
 import com.andreykosarygin.common.PointsBalance
-import javax.inject.Inject
 
-class AppDataImpl @Inject constructor(
+class AppDataImpl (
     private val sharedPreferences: SharedPreferences
 ) : AppData {
     private val keyPointsBalance = "key_points_balance"

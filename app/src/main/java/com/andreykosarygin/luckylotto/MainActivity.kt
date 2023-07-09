@@ -16,6 +16,7 @@ import com.andreykosarygin.common.NavigationRoutes.SCREEN_MAIN
 import com.andreykosarygin.game_ui.screen_game.ScreenGame
 import com.andreykosarygin.game_ui.screen_game.ScreenGameViewModel
 import com.andreykosarygin.history_ui.screen_history.ScreenHistory
+import com.andreykosarygin.history_ui.screen_history.ScreenHistoryViewModel
 import com.andreykosarygin.main_ui.screen_info.ScreenInfo
 import com.andreykosarygin.main_ui.screen_info.ScreenInfoViewModel
 import com.andreykosarygin.main_ui.screen_main.ScreenMain
@@ -41,7 +42,7 @@ class MainActivity : ComponentActivity() {
                     ScreenBalance(navController = navController, viewModel = ScreenBalanceViewModel())
                 }
                 composable(route = SCREEN_HISTORY) {
-                    ScreenHistory(navController = navController)
+                    ScreenHistory(navController = navController, viewModel = ScreenHistoryViewModel())
                 }
             }
         }

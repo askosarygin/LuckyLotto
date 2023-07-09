@@ -1,12 +1,9 @@
 package com.andreykosarygin.main_ui.screen_main
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import com.andreykosarygin.common.LuckyLottoViewModel
 import com.andreykosarygin.common.LuckyLottoViewModelSingleLifeEvent
-import javax.inject.Inject
 
-class ScreenMainViewModel @Inject constructor(
+class ScreenMainViewModel (
 
 ) : LuckyLottoViewModel<ScreenMainViewModel.Model>(Model()){
 
@@ -55,18 +52,6 @@ class ScreenMainViewModel @Inject constructor(
             it.copy(
                 navigationEvent = navigationEvent
             )
-        }
-    }
-
-    class Factory @Inject constructor(
-
-    ) : ViewModelProvider.Factory {
-        @Suppress("UNCHECKED_CAST")
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            require(modelClass == ScreenMainViewModel::class.java)
-            return ScreenMainViewModel(
-
-            ) as T
         }
     }
 }
