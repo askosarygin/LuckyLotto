@@ -11,8 +11,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -25,7 +23,6 @@ import androidx.navigation.NavController
 import com.andreykosarygin.common.LuckyLottoCommonBackground
 import com.andreykosarygin.common.LuckyLottoWhiteText
 import com.andreykosarygin.common.NavigationRoutes.SCREEN_INFO
-import com.andreykosarygin.common.OperationInfo
 import com.andreykosarygin.common.R
 
 //@SuppressLint("UnrememberedMutableState")
@@ -49,22 +46,22 @@ fun ScreenHistory(
         }
     }
 
-    val listOperationInfos = remember {
-        mutableStateListOf(
-            OperationInfo(
-                "21.08",
-                "+15"
-            ),
-            OperationInfo(
-                "22.08",
-                "+10"
-            ),
-            OperationInfo(
-                "23.08",
-                "-20"
-            ),
-        )
-    }
+//    val listPointsOperationInfos = remember {
+//        mutableStateListOf(
+//            PointsOperationInfo(
+//                "21.08",
+//                "+15"
+//            ),
+//            PointsOperationInfo(
+//                "22.08",
+//                "+10"
+//            ),
+//            PointsOperationInfo(
+//                "23.08",
+//                "-20"
+//            ),
+//        )
+//    }
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier.fillMaxSize()
@@ -98,7 +95,7 @@ fun ScreenHistory(
                         .padding(vertical = 35.dp)
                 ) {
                     LazyColumn {
-                        items(items = listOperationInfos) { pointsInfo ->
+                        items(items = model.listOfPointsOperationInfo) { pointsInfo ->
                             LuckyLottoWhiteText(
                                 text = "${pointsInfo.date}                      ${pointsInfo.operationValue}",
                                 fontSize = 32.sp,

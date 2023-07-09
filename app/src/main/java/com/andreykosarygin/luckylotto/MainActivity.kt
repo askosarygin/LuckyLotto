@@ -18,6 +18,7 @@ import com.andreykosarygin.common.NavigationRoutes.SCREEN_HISTORY
 import com.andreykosarygin.common.NavigationRoutes.SCREEN_INFO
 import com.andreykosarygin.common.NavigationRoutes.SCREEN_MAIN
 import com.andreykosarygin.data.RepositoryGameDomainImpl
+import com.andreykosarygin.data.RepositoryHistoryDomainImpl
 import com.andreykosarygin.data.appdata.AppDataImpl
 import com.andreykosarygin.data.db.PointsOperationsDatabase
 import com.andreykosarygin.data.db.PointsOperationsStorage
@@ -28,6 +29,7 @@ import com.andreykosarygin.game_domain.usecases.SavePointsBalanceUseCase
 import com.andreykosarygin.game_domain.usecases.SaveToHistoryOfOperationsUseCase
 import com.andreykosarygin.game_ui.screen_game.ScreenGame
 import com.andreykosarygin.game_ui.screen_game.ScreenGameViewModel
+import com.andreykosarygin.history_domain.usecases.LoadHistoryOfPointsOperationsUseCase
 import com.andreykosarygin.history_ui.screen_history.ScreenHistory
 import com.andreykosarygin.history_ui.screen_history.ScreenHistoryViewModel
 import com.andreykosarygin.main_ui.screen_info.ScreenInfo
@@ -45,6 +47,9 @@ class MainApp : Application() {
     private lateinit var repositoryGameDomainImpl: RepositoryGameDomainImpl
     lateinit var interactorImplGameDomain: InteractorImpl
 
+    private lateinit var repositoryHistoryDomainImpl: RepositoryHistoryDomainImpl
+    lateinit var interactorImplHistoryDomain: com.andreykosarygin.history_domain.InteractorImpl
+
     override fun onCreate() {
         super.onCreate()
 
@@ -60,6 +65,14 @@ class MainApp : Application() {
             GetPointsBalanceUseCase(repositoryGameDomainImpl),
             SavePointsBalanceUseCase(repositoryGameDomainImpl),
             SaveToHistoryOfOperationsUseCase(repositoryGameDomainImpl)
+        )
+
+
+        repositoryHistoryDomainImpl = RepositoryHistoryDomainImpl(pointsOperationsStorage)
+        interactorImplHistoryDomain = com.andreykosarygin.history_domain.InteractorImpl(
+            LoadHistoryOfPointsOperationsUseCase(
+                repositoryHistoryDomainImpl
+            )
         )
     }
 }
@@ -96,7 +109,9 @@ class MainActivity : ComponentActivity() {
                 composable(route = SCREEN_HISTORY) {
                     ScreenHistory(
                         navController = navController,
-                        viewModel = ScreenHistoryViewModel()
+                        viewModel = ScreenHistoryViewModel(
+                            getApplicationInstance().interactorImplHistoryDomain
+                        )
                     )
                 }
             }

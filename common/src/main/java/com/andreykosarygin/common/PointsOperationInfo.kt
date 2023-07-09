@@ -1,6 +1,6 @@
 package com.andreykosarygin.common
 
-data class OperationInfo(
+data class PointsOperationInfo(
     val date: String,
     val operationValue: String
 )
