@@ -16,6 +16,7 @@ import com.andreykosarygin.game_ui.screen_game.ScreenGame
 import com.andreykosarygin.history_ui.screen_history.ScreenHistory
 import com.andreykosarygin.main_ui.screen_info.ScreenInfo
 import com.andreykosarygin.main_ui.screen_main.ScreenMain
+import com.andreykosarygin.main_ui.screen_main.ScreenMainViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,7 +26,7 @@ class MainActivity : ComponentActivity() {
 
             NavHost(navController = navController, startDestination = SCREEN_MAIN) {
                 composable(route = SCREEN_MAIN) {
-                    ScreenMain(navController = navController)
+                    ScreenMain(navController = navController, viewModel = ScreenMainViewModel())
                 }
                 composable(route = SCREEN_GAME) {
                     ScreenGame(navController = navController)
