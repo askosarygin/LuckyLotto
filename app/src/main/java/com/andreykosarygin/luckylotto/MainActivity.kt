@@ -13,6 +13,7 @@ import com.andreykosarygin.common.NavigationRoutes.SCREEN_HISTORY
 import com.andreykosarygin.common.NavigationRoutes.SCREEN_INFO
 import com.andreykosarygin.common.NavigationRoutes.SCREEN_MAIN
 import com.andreykosarygin.game_ui.screen_game.ScreenGame
+import com.andreykosarygin.game_ui.screen_game.ScreenGameViewModel
 import com.andreykosarygin.history_ui.screen_history.ScreenHistory
 import com.andreykosarygin.main_ui.screen_info.ScreenInfo
 import com.andreykosarygin.main_ui.screen_main.ScreenMain
@@ -29,7 +30,7 @@ class MainActivity : ComponentActivity() {
                     ScreenMain(navController = navController, viewModel = ScreenMainViewModel())
                 }
                 composable(route = SCREEN_GAME) {
-                    ScreenGame(navController = navController)
+                    ScreenGame(navController = navController, viewModel = ScreenGameViewModel())
                 }
                 composable(route = SCREEN_INFO) {
                     ScreenInfo(navController = navController)
