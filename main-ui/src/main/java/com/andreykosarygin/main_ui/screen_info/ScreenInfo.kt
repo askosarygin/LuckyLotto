@@ -27,7 +27,11 @@ import com.andreykosarygin.common.NavigationRoutes.SCREEN_MAIN
 //@Preview(showBackground = true)
 //@Composable
 //private fun Preview() {
-//    ScreenInfo({},{})
+//    ScreenInfo(
+//        "",
+//        _,
+//        ScreenInfoViewModel()
+//    )
 //}
 
 @Composable
@@ -87,7 +91,7 @@ fun ScreenInfo(
                     text = stringResource(
                         id = com.andreykosarygin.common.R.string.info_description
                     ),
-                    fontSize = 32.sp,
+                    fontSize = 28.sp,
                     font = Font(resId = com.andreykosarygin.common.R.font.bitter_700),
                     modifier = Modifier.padding(horizontal = 60.dp)
                 )

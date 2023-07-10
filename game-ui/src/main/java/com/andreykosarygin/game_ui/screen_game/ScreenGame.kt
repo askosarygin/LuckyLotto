@@ -55,7 +55,14 @@ fun ScreenGame(
     navController: NavController,
     viewModel: ScreenGameViewModel
 ) {
-    viewModel.initArguments(departureArguments)
+    var argumentsIsInit by remember {
+        mutableStateOf(false)
+    }
+
+    if (!argumentsIsInit) {
+        viewModel.initArguments(departureArguments)
+        argumentsIsInit = true
+    }
 
 
     val model by viewModel.model.collectAsState()

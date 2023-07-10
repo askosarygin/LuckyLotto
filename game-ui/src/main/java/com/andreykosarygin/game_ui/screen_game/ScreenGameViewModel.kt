@@ -73,7 +73,6 @@ class ScreenGameViewModel(
 
     fun animationFinished() {
         updatePlayAnimation(false)
-
         model.value.apply {
             when {
                 (drumIconNeedToShowLeft == drumIconNeedToShowCenter) && (drumIconNeedToShowCenter == drumIconNeedToShowRight) ->

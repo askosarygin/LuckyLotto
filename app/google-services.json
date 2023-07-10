@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1003145109297",
+    "project_id": "lucky-lotto-test",
+    "storage_bucket": "lucky-lotto-test.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1003145109297:android:d2bfe93c15000ecb021a10",
+        "android_client_info": {
+          "package_name": "com.andreykosarygin.luckylotto"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1003145109297-ugf65n66fere4nneunrodlh39aft3bnj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDg7imfweIYgzgxiwAjtIpT06uf0PXoKVI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1003145109297-ugf65n66fere4nneunrodlh39aft3bnj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
