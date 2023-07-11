@@ -1,4 +1,4 @@
-package com.andreykosarygin.luckylotto.ui.theme
+package com.andreykosarygin.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

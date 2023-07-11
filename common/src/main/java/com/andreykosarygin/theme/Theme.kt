@@ -1,4 +1,4 @@
-package com.andreykosarygin.luckylotto.ui.theme
+package com.andreykosarygin.theme
 
 import android.app.Activity
 import android.os.Build
